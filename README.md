@@ -36,9 +36,9 @@ Stack: TanStack Start (React 19, file-based routing), Vite, Tailwind CSS 4.
 
 ## Known issue carried over from the original project
 
-The Rhea logo (`src/assets/rhea-logo.png.asset.json`) and the home hero video
-(`src/assets/hero-clinic.mp4.asset.json`) are Lovable-hosted asset pointers —
-their URLs (`/__l5e/assets-v1/…`) only resolve inside Lovable's hosting.
-Drop the real `rhea-logo.png` / `hero-clinic.mp4` files into `src/assets/`
-and update the imports in `src/components/clinik/Nav.tsx` and
-`src/routes/index.tsx` before deploying anywhere else.
+The home hero video
+(`src/assets/hero-clinic.mp4.asset.json`) is a Lovable-hosted asset pointer —
+its URL (`/__l5e/assets-v1/…`) only resolves inside Lovable's hosting.
+Drop the real `hero-clinic.mp4` file into `src/assets/`
+and update the import in `src/routes/index.tsx` before deploying anywhere else.
+(The Rhea logo was resolved on 2026-11-11: `src/assets/rhea-logo.png` is the real file.)

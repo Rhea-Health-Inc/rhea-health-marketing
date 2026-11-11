@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import logoAsset from "@/assets/rhea-logo.png.asset.json";
+import logoUrl from "@/assets/rhea-logo.png";
 import { appLink } from "@/lib/app-url";
 
 export function Nav() {
@@ -56,7 +56,7 @@ export function Nav() {
 export function Logo({ className = "", height = 36 }: { className?: string; height?: number }) {
   return (
     <img
-      src={logoAsset.url}
+      src={logoUrl}
       alt="Rhea Health"
       height={height}
       style={{ height, width: "auto" }}
