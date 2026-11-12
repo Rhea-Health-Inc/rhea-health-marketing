@@ -34,6 +34,17 @@ npx tsc --noEmit
 
 Stack: TanStack Start (React 19, file-based routing), Vite, Tailwind CSS 4.
 
+## Deploy (GitHub Pages)
+
+The site is published to GitHub Pages by `.github/workflows/pages.yml` on
+every push to `main`: it builds the static SPA snapshot with
+`RHEA_SPA=1`, `RHEA_BASE=/rhea-health-marketing/` (the Pages subpath — the
+router reads it via `import.meta.env.BASE_URL`) and
+`VITE_APP_URL=https://okhaibhor101chris.betadrop.site` (so Sign in / Sign up
+link to the app preview), then ships `.output/public` with `index.html`,
+per-route copies and a `404.html` SPA fallback.
+Live: https://rhea-health-inc.github.io/rhea-health-marketing/
+
 ## Assets
 
 The home hero video (`src/assets/hero-clinic.mp4`, with poster
