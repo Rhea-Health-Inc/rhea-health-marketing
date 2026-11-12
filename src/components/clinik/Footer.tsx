@@ -11,13 +11,22 @@ export function Footer() {
         { t: "Portable ID", href: "#" },
         { t: "Dashboard", href: "#" },
         { t: "Integrations", href: "#" },
-        { t: "Rhea Loop", href: "/loop" },
+        { t: "Loop", href: "/loop" },
       ],
     },
     {
-      h: "Rhea Loop",
+      h: "Resources",
       l: [
-        { t: "Rhea Loop", href: "/loop" },
+        { t: "Docs", href: "#" },
+        { t: "Security", href: "#" },
+        { t: "Trust center", href: "#" },
+        { t: "Changelog", href: "#" },
+      ],
+    },
+    {
+      h: "Loop",
+      l: [
+        { t: "Loop", href: "/loop" },
         { t: "Rhea App", href: "/loop#ecosystem" },
         { t: "Rhea ID", href: "/loop#rhea-id" },
         { t: "Health Metrics", href: "/loop#signals" },
@@ -33,15 +42,6 @@ export function Footer() {
         { t: "Careers", href: "#" },
         { t: "Press", href: "#" },
         { t: "Contact", href: "#" },
-      ],
-    },
-    {
-      h: "Resources",
-      l: [
-        { t: "Docs", href: "#" },
-        { t: "Security", href: "#" },
-        { t: "Trust center", href: "#" },
-        { t: "Changelog", href: "#" },
       ],
     },
     {

@@ -18,24 +18,24 @@ import imgBox from "@/assets/loop-box.jpg";
 export const Route = createFileRoute("/loop")({
   head: () => ({
     meta: [
-      { title: "Rhea Loop - The wearable built around your baseline" },
+      { title: "Loop — the wearable that keeps you and your doctor in the loop" },
       {
         name: "description",
         content:
-          "Rhea Loop is a 24/7 wearable that turns everyday health signals into personal trends you can act on. Join the waitlist.",
+          "Loop is a light, screen-free wearable that tracks sleep, activity and recovery — and, only with your permission, shares trends with your care team. Join the waitlist.",
       },
-      { property: "og:title", content: "Rhea Loop - The wearable built around your baseline" },
+      { property: "og:title", content: "Loop — by Rhea Health" },
       {
         property: "og:description",
         content:
-          "Continuous health insights, designed around you. A minimal wearable built for day and night.",
+          "A screen-free wearable for sleep, activity and recovery — and a closer connection to your care team, on your terms.",
       },
       { property: "og:type", content: "product" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Rhea Loop" },
+      { name: "twitter:title", content: "Loop" },
       {
         name: "twitter:description",
-        content: "Continuous health insights, designed around you.",
+        content: "Your health, in the loop. A screen-free wearable by Rhea Health.",
       },
     ],
     links: [
@@ -99,7 +99,7 @@ const BTN_BASE =
 function ButtonLink({
   href,
   children,
-  variant = "light",
+  variant = "dark",
   size = "md",
   className = "",
 }: {
@@ -124,16 +124,28 @@ function ButtonLink({
   );
 }
 
+function Eyebrow({ children, tone = "green" }: { children: ReactNode; tone?: "green" | "white" }) {
+  return (
+    <p
+      className={`text-[12px] font-semibold uppercase tracking-[0.2em] ${
+        tone === "green" ? "text-[#2F6B4F]" : "text-white/60"
+      }`}
+    >
+      {children}
+    </p>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 /* page                                                                */
 /* ------------------------------------------------------------------ */
 
 function LoopPage() {
   return (
-    <div className="loop-root bg-white text-black antialiased overflow-x-hidden">
+    <div className="loop-root bg-[#FAF9F6] text-black antialiased overflow-x-hidden">
       <style>{`
         .loop-root { font-family: "Geist", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", sans-serif; }
-        .loop-root h1,.loop-root h2,.loop-root h3 { letter-spacing: -0.035em; line-height: 1; font-weight: 500; }
+        .loop-root h1,.loop-root h2,.loop-root h3 { letter-spacing: -0.035em; line-height: 1.02; font-weight: 500; }
         .loop-num { font-variant-numeric: tabular-nums; letter-spacing: -0.03em; }
         .loop-rail { scrollbar-width: none; }
         .loop-rail::-webkit-scrollbar { display: none; }
@@ -142,15 +154,14 @@ function LoopPage() {
       <Announcement />
       <TopNav />
       <Hero />
-      <FreeTrialBand />
+      <WaitlistBand />
+      <TwoPaths />
       <MetricRail />
-      <Showcase />
+      <Sharing />
       <Baseline />
       <Ecosystem />
-      <CareTeam />
-      <Quote />
-      <Membership />
       <InBox />
+      <GetLoop />
       <Faq />
       <ClosingCta />
       <LoopFooter />
@@ -163,36 +174,35 @@ function LoopPage() {
 function Announcement() {
   return (
     <div className="flex w-full items-center justify-center gap-3 bg-[#2F6B4F] px-6 py-2.5 text-center text-[13px] text-white">
-      <span>Rhea Loop is coming. Reserve your place on the waitlist.</span>
+      <span>Loop is coming soon. Join the waitlist for first access.</span>
       <a href="#waitlist" className="whitespace-nowrap underline underline-offset-4">
-        Learn more
+        Join the waitlist
       </a>
     </div>
   );
 }
 
 const NAV = [
-  { label: "How it works", href: "#how" },
-  { label: "Health metrics", href: "#metrics" },
-  { label: "Rhea App", href: "#app" },
-  { label: "Rhea ID", href: "#ecosystem" },
-  { label: "Membership", href: "#membership" },
+  { label: "Overview", href: "#top" },
+  { label: "What it tracks", href: "#metrics" },
+  { label: "Sharing", href: "#sharing" },
+  { label: "In the box", href: "#box" },
   { label: "FAQ", href: "#faq" },
 ];
 
 function TopNav() {
   return (
-    <header className="sticky top-0 z-50 w-full bg-black">
+    <header className="sticky top-0 z-50 w-full border-b border-black/8 bg-[#FAF9F6]/85 backdrop-blur-md">
       <div className="mx-auto flex h-[68px] max-w-[1600px] items-center justify-between gap-6 px-6 sm:px-10">
         <a href="#top" className="shrink-0">
-          <img src={logo} alt="Rhea Loop" className="h-8 w-auto invert sm:h-9" />
+          <img src={logo} alt="Loop" className="h-8 w-auto sm:h-9" />
         </a>
         <nav className="hidden items-center gap-8 lg:flex">
           {NAV.map((n) => (
             <a
               key={n.href}
               href={n.href}
-              className="whitespace-nowrap text-[12px] font-medium uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
+              className="whitespace-nowrap text-[12px] font-medium uppercase tracking-[0.14em] text-black/60 transition-colors hover:text-black"
             >
               {n.label}
             </a>
@@ -210,51 +220,140 @@ function TopNav() {
 
 function Hero() {
   return (
-    <section id="top" className="relative h-[calc(100vh-68px)] min-h-[620px] w-full bg-black">
-      <img
-        src={imgHero}
-        alt="Rhea Loop worn on a wrist"
-        className="absolute inset-0 h-full w-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/25 to-black/80" />
+    <section id="top" className="relative w-full overflow-hidden">
+      <div className="mx-auto grid max-w-[1600px] items-center gap-12 px-6 pb-20 pt-14 sm:px-10 lg:grid-cols-2 lg:pb-28 lg:pt-20">
+        <Rise>
+          <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 text-[13px] text-black/70">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#2F6B4F]" />
+            Loop · a wearable by Rhea Health
+          </div>
+          <h1 className="mt-7 max-w-[12ch] text-[clamp(2.9rem,6vw,5.6rem)] font-medium">
+            Your health, in the loop.
+          </h1>
+          <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-black/60 sm:text-[19px]">
+            Loop is a light, screen-free band that follows your sleep, activity and recovery around
+            the clock — and, only when you choose, keeps your doctor in the loop between visits.
+          </p>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <ButtonLink href="#waitlist" variant="accent" size="lg">
+              Join the waitlist
+            </ButtonLink>
+            <ButtonLink href="#sharing" variant="outlineDark" size="lg">
+              How sharing works
+            </ButtonLink>
+          </div>
+          <p className="mt-8 text-[13px] uppercase tracking-[0.16em] text-black/40">
+            Screen-free · Worn day and night · iOS &amp; Android
+          </p>
+        </Rise>
 
-      <div className="relative z-10 mx-auto flex h-full max-w-[1600px] flex-col justify-center px-6 sm:px-10">
-        <h1 className="max-w-[16ch] text-[clamp(2.8rem,7vw,6.5rem)] font-medium text-white">
-          The wearable designed around your baseline
-        </h1>
-        <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-white sm:text-[19px]">
-          Rhea Loop turns 24/7 health signals into personal insight, so you can understand your
-          sleep, movement and recovery in the context of you.
-        </p>
-        <div className="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-white/12 px-4 py-2 text-[13px] text-white backdrop-blur">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#7FD8A4]" />
-          <span className="whitespace-nowrap">Waitlist now open</span>
-        </div>
+        <Rise delay={120}>
+          <div className="relative">
+            <div className="overflow-hidden rounded-[32px] bg-[#EFEDE8]">
+              <img
+                src={imgRender}
+                alt="The Loop band"
+                className="h-full max-h-[560px] w-full object-cover"
+              />
+            </div>
+            <div className="absolute left-5 top-5 rounded-2xl bg-white/90 px-5 py-4 shadow-[0_12px_32px_rgba(16,24,20,0.10)] backdrop-blur">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-black/45">
+                Last night
+              </p>
+              <p className="loop-num mt-1 text-[22px] font-medium">Sleep 7 h 42 min</p>
+            </div>
+            <div className="absolute bottom-5 right-5 flex items-center gap-2.5 rounded-full bg-[#173F2C] py-2.5 pl-3.5 pr-5 text-white shadow-[0_12px_32px_rgba(16,24,20,0.22)]">
+              <span className="h-2 w-2 rounded-full bg-[#7FD8A4]" />
+              <span className="text-[13px] font-medium">Shared with your care team · On</span>
+            </div>
+          </div>
+          <p className="mt-3 text-right text-[12px] text-black/35">
+            Illustrative app data. Sharing is always opt-in.
+          </p>
+        </Rise>
       </div>
+    </section>
+  );
+}
 
-      <div className="absolute inset-x-0 bottom-10 z-10 flex justify-center px-6">
-        <ButtonLink href="#waitlist" variant="light" size="lg">
-          Join the waitlist
+function WaitlistBand() {
+  return (
+    <section id="how" className="border-y border-black/8 bg-white">
+      <div className="mx-auto flex max-w-[1600px] flex-col items-start gap-6 px-6 py-12 sm:px-10 md:flex-row md:items-center md:justify-between">
+        <div className="max-w-2xl">
+          <h2 className="text-[26px] font-medium">Be first in line when Loop ships</h2>
+          <p className="mt-3 text-[16px] leading-relaxed text-black/60">
+            Waitlist members get first access to Loop, its charging accessory and the Rhea App —
+            with no commitment today.
+          </p>
+        </div>
+        <ButtonLink href="#waitlist" variant="dark" className="shrink-0">
+          Reserve yours
         </ButtonLink>
       </div>
     </section>
   );
 }
 
-function FreeTrialBand() {
+/* --------------------------- TWO PATHS ------------------------------ */
+
+function TwoPaths() {
+  const cards = [
+    {
+      img: imgGym,
+      alt: "Training with Loop",
+      eyebrow: "For your everyday",
+      title: "A clearer read on your body",
+      body: "Train, sleep and recover with the full picture: how hard you worked, how well you rested, and whether you're ready to go again — without a screen asking for your attention.",
+      link: "See what Loop tracks",
+      href: "#metrics",
+    },
+    {
+      img: imgMorning,
+      alt: "Starting the day with Loop",
+      eyebrow: "For your care team",
+      title: "So a visit isn't the whole story",
+      body: "An appointment is a snapshot; your health is everything in between. When you connect Loop to your clinician, they can follow the trends that matter between visits — and you decide exactly what they see.",
+      link: "How sharing works",
+      href: "#sharing",
+    },
+  ];
   return (
-    <section id="how" className="border-b border-black/10 bg-white">
-      <div className="mx-auto flex max-w-[1600px] flex-col items-start gap-6 px-6 py-14 sm:px-10 md:flex-row md:items-center md:justify-between">
-        <div className="max-w-2xl">
-          <h2 className="text-[26px] font-medium">Get started when Loop ships</h2>
-          <p className="mt-3 text-[16px] leading-relaxed text-black/60">
-            Waitlist members get first access to Rhea Loop, the charging accessory and the Rhea App,
-            with no commitment today.
-          </p>
+    <section className="py-20 sm:py-28">
+      <div className="mx-auto max-w-[1600px] px-6 sm:px-10">
+        <Rise>
+          <Eyebrow>One band, two jobs</Eyebrow>
+          <h2 className="mt-5 max-w-[22ch] text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium">
+            Made for your day — and for the people who care for you.
+          </h2>
+        </Rise>
+        <div className="mt-12 grid gap-5 lg:grid-cols-2">
+          {cards.map((c, i) => (
+            <Rise key={c.eyebrow} delay={i * 90}>
+              <div className="group flex h-full flex-col overflow-hidden rounded-[28px] bg-white ring-1 ring-black/8">
+                <div className="overflow-hidden">
+                  <img
+                    src={c.img}
+                    alt={c.alt}
+                    loading="lazy"
+                    className="h-[300px] w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.04]"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-8 sm:p-10">
+                  <Eyebrow>{c.eyebrow}</Eyebrow>
+                  <h3 className="mt-4 text-[26px] font-medium">{c.title}</h3>
+                  <p className="mt-3 flex-1 text-[16px] leading-relaxed text-black/60">{c.body}</p>
+                  <a
+                    href={c.href}
+                    className="mt-6 inline-flex items-center gap-2 text-[15px] font-medium text-[#2F6B4F]"
+                  >
+                    {c.link} <span aria-hidden>→</span>
+                  </a>
+                </div>
+              </div>
+            </Rise>
+          ))}
         </div>
-        <ButtonLink href="#waitlist" variant="dark" className="shrink-0">
-          Reserve your Loop
-        </ButtonLink>
       </div>
     </section>
   );
@@ -263,33 +362,51 @@ function FreeTrialBand() {
 /* -------------------------- METRIC RAIL ----------------------------- */
 
 const TILES = [
-  { img: imgSleep, title: "Get better sleep", body: "Duration, consistency and overnight trends." },
-  { img: imgGym, title: "Understand your effort", body: "Heart-rate zones, intensity and load." },
-  { img: imgMorning, title: "See your recovery", body: "HRV, resting heart rate and readiness." },
-  { img: imgActivity, title: "Track everyday movement", body: "Steps, distance and energy use." },
+  {
+    img: imgSleep,
+    title: "Sleep, properly understood",
+    body: "Duration, timing, consistency and overnight breathing trends.",
+  },
+  {
+    img: imgActivity,
+    title: "Activity & movement",
+    body: "Steps, distance, active minutes and everyday energy.",
+  },
+  {
+    img: imgGym,
+    title: "Workouts & effort",
+    body: "Heart-rate zones and training load — from runs to reps.",
+  },
+  {
+    img: imgMorning,
+    title: "Recovery & readiness",
+    body: "HRV and resting heart rate, read against your own baseline.",
+  },
   {
     img: imgWork,
-    title: "Follow your heart signals",
-    body: "Continuous heart rate, day and night.",
+    title: "Heart, around the clock",
+    body: "Continuous heart rate, day and night — not just at the clinic.",
   },
   {
     img: imgEvening,
-    title: "Watch long-term trends",
-    body: "Weeks and months, not single readings.",
+    title: "Trends, not snapshots",
+    body: "Weeks and months of context behind every number.",
   },
 ];
 
 function MetricRail() {
   return (
     <section id="metrics" className="bg-white py-20 sm:py-28">
+      <span id="signals" className="block h-0 scroll-mt-24" aria-hidden />
       <div className="mx-auto max-w-[1600px] px-6 sm:px-10">
         <Rise>
-          <h2 className="max-w-[20ch] text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium">
-            Know what your body needs, every day.
+          <Eyebrow>What Loop tracks</Eyebrow>
+          <h2 className="mt-5 max-w-[20ch] text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium">
+            The signals that shape your day.
           </h2>
           <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-black/60">
-            With continuous monitoring across sleep, movement, stress and heart signals, Rhea Loop
-            gives you a complete view of your health.
+            Loop quietly follows the measures that say the most about how you&apos;re doing — then
+            shows you what changed, and what it might mean.
           </p>
         </Rise>
 
@@ -318,68 +435,92 @@ function MetricRail() {
   );
 }
 
-/* --------------------------- SHOWCASE -------------------------------- */
+/* ---------------------------- SHARING -------------------------------- */
 
-function Showcase() {
-  const items = [
+function Sharing() {
+  const steps = [
     {
-      img: imgCharge,
-      title: "Get 24/7 health insights",
-      body: "Personalized insight on sleep, activity, recovery and heart signals.",
-      tall: true,
+      n: "01",
+      title: "Wear Loop",
+      body: "Your data lives in your Rhea App, under your Rhea ID. It is yours first — Loop works fully on its own.",
     },
     {
-      img: imgProduct,
-      title: "Built to be worn continuously",
-      body: "Minimal, light and comfortable enough to forget you have it on.",
+      n: "02",
+      title: "Choose your clinician",
+      body: "Connect a participating doctor or clinic, and pick exactly which trends they can see. Nothing is shared before you say so.",
     },
     {
-      img: imgGym,
-      title: "Measure every step and rep",
-      body: "Understand how effort today affects how you feel tomorrow.",
-    },
-    {
-      img: imgHero,
-      title: "Made for real life",
-      body: "Designed to fit your day without asking for your attention.",
+      n: "03",
+      title: "They see the trend, not the noise",
+      body: "Your care team follows sleep, activity and recovery patterns between visits, so appointments start from what's actually been happening.",
     },
   ];
+  const rows: { label: string; state: string; on: boolean }[] = [
+    { label: "Sleep trends", state: "Shared", on: true },
+    { label: "Activity & recovery", state: "Shared", on: true },
+    { label: "Heart trends", state: "Shared", on: true },
+    { label: "Location", state: "Never shared", on: false },
+  ];
   return (
-    <section id="app" className="bg-black py-20 text-white sm:py-28">
-      <div className="mx-auto max-w-[1600px] px-6 sm:px-10">
+    <section id="sharing" className="bg-[#173F2C] py-20 text-white sm:py-28">
+      <span id="care-team" className="block h-0 scroll-mt-24" aria-hidden />
+      <span id="privacy" className="block h-0 scroll-mt-24" aria-hidden />
+      <div className="mx-auto grid max-w-[1600px] items-center gap-14 px-6 sm:px-10 lg:grid-cols-2">
         <Rise>
-          <h2 className="max-w-[18ch] text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium">
-            The wearable for better health
+          <Eyebrow tone="white">Sharing, on your terms</Eyebrow>
+          <h2 className="mt-5 max-w-[18ch] text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium">
+            Keep your doctor in the loop — only if you want them there.
           </h2>
-          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-white/65">
-            A daily understanding of your body, and insight that compounds over time.
-          </p>
-          <ButtonLink href="#waitlist" variant="light" className="mt-8">
-            Join the waitlist
-          </ButtonLink>
-        </Rise>
-
-        <div className="mt-14 grid gap-5 md:grid-cols-2">
-          {items.map((it, i) => (
-            <Rise key={it.title} delay={i * 80}>
-              <div className="group relative h-[52vh] min-h-[340px] overflow-hidden rounded-[28px]">
-                <img
-                  src={it.img}
-                  alt={it.title}
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.05]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/10" />
-                <div className="absolute inset-x-0 bottom-0 p-8">
-                  <h3 className="max-w-[18ch] text-[24px] font-medium text-white">{it.title}</h3>
-                  <p className="mt-2 max-w-md text-[15px] leading-relaxed text-white/75">
-                    {it.body}
+          <div className="mt-12 space-y-10">
+            {steps.map((s) => (
+              <div key={s.n} className="flex gap-6">
+                <span className="loop-num text-[14px] font-semibold text-[#7FD8A4]">{s.n}</span>
+                <div>
+                  <h3 className="text-[20px] font-medium">{s.title}</h3>
+                  <p className="mt-2 max-w-md text-[16px] leading-relaxed text-white/65">
+                    {s.body}
                   </p>
                 </div>
               </div>
-            </Rise>
-          ))}
-        </div>
+            ))}
+          </div>
+          <ul className="mt-12 space-y-3 text-[16px] text-white/80">
+            <li>Sharing is always opt-in — never on by default.</li>
+            <li>Pause or disconnect a clinician at any time.</li>
+            <li>You can always see exactly who has access.</li>
+          </ul>
+        </Rise>
+
+        <Rise delay={120}>
+          <div className="rounded-[28px] bg-white p-8 text-black shadow-[0_24px_60px_rgba(0,0,0,0.25)] sm:p-10">
+            <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-black/45">
+              Sharing with
+            </p>
+            <p className="mt-3 text-[22px] font-medium">Your connected clinician</p>
+            <p className="mt-1 text-[15px] text-black/55">Via Rhea · connected by you</p>
+            <div className="mt-8 divide-y divide-black/8">
+              {rows.map((r) => (
+                <div key={r.label} className="flex items-center justify-between py-4">
+                  <span className="text-[16px]">{r.label}</span>
+                  <span
+                    className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[13px] font-medium ${
+                      r.on ? "bg-[#2F6B4F]/10 text-[#2F6B4F]" : "bg-black/5 text-black/45"
+                    }`}
+                  >
+                    <span
+                      className={`h-1.5 w-1.5 rounded-full ${r.on ? "bg-[#2F6B4F]" : "bg-black/30"}`}
+                    />
+                    {r.state}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <p className="mt-6 text-[14px] leading-relaxed text-black/50">
+              An illustration of the controls you&apos;ll have. Change or revoke access whenever you
+              like — it takes effect immediately.
+            </p>
+          </div>
+        </Rise>
       </div>
     </section>
   );
@@ -390,44 +531,43 @@ function Showcase() {
 function Baseline() {
   const { ref, seen } = useInView<SVGSVGElement>(0.4);
   return (
-    <section className="bg-white py-20 sm:py-28">
+    <section className="py-20 sm:py-28">
       <div className="mx-auto grid max-w-[1600px] gap-14 px-6 sm:px-10 lg:grid-cols-2 lg:items-center">
         <Rise>
-          <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#2F6B4F]">
-            Personal baseline
-          </p>
+          <Eyebrow>Your baseline</Eyebrow>
           <h2 className="mt-5 text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium">
-            Your normal is personal.
+            Normal is personal.
           </h2>
           <p className="mt-6 max-w-md text-[17px] leading-relaxed text-black/60">
-            Rhea learns your patterns over time, so a change is measured against you rather than a
-            population average.
+            Loop learns what&apos;s usual for you — your resting heart rate, your HRV, your sleep —
+            so a change is measured against you, not against everyone. And when something drifts,
+            you see it early, in plain language.
           </p>
           <ButtonLink href="#faq" variant="outlineDark" className="mt-8">
-            How it works
+            Questions
           </ButtonLink>
         </Rise>
 
         <Rise delay={100}>
-          <div className="rounded-[28px] bg-black p-8 text-white sm:p-10">
-            <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-white/50">
+          <div className="rounded-[28px] border border-black/8 bg-white p-8 sm:p-10">
+            <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-black/45">
               Resting heart rate
             </p>
             <p className="loop-num mt-3 text-[clamp(2.4rem,5vw,3.6rem)] font-medium">+8%</p>
-            <p className="mt-1 text-[15px] text-white/60">above your usual range</p>
+            <p className="mt-1 text-[15px] text-black/55">above your usual range</p>
 
             <svg ref={ref} viewBox="0 0 600 200" className="mt-8 w-full">
               <path
                 d="M0 140 C 80 130, 140 150, 220 138 S 360 128, 440 132 S 540 126, 600 130"
                 fill="none"
-                stroke="rgba(255,255,255,0.2)"
+                stroke="rgba(23,63,44,0.14)"
                 strokeWidth="10"
                 strokeLinecap="round"
               />
               <path
                 d="M0 145 C 90 138, 150 150, 230 142 S 370 150, 450 120 S 540 78, 600 66"
                 fill="none"
-                stroke="#7FD8A4"
+                stroke="#2F6B4F"
                 strokeWidth="3"
                 strokeLinecap="round"
                 strokeDasharray="1200"
@@ -435,7 +575,7 @@ function Baseline() {
                 style={{ transition: "stroke-dashoffset 2.2s cubic-bezier(.16,1,.3,1)" }}
               />
             </svg>
-            <p className="mt-6 text-[12px] uppercase tracking-[0.18em] text-white/35">
+            <p className="mt-6 text-[12px] uppercase tracking-[0.18em] text-black/35">
               Illustrative example only
             </p>
           </div>
@@ -447,26 +587,28 @@ function Baseline() {
 
 /* -------------------------- ECOSYSTEM -------------------------------- */
 
-const CHAIN = ["Rhea Loop", "Rhea App", "Rhea ID", "Health record", "Rhea AI", "Care team"];
+const CHAIN = ["Loop", "Rhea App", "Rhea ID", "Health record", "Rhea AI", "Care team"];
 
 function Ecosystem() {
   return (
     <section id="ecosystem" className="bg-[#F5F5F3] py-20 sm:py-28">
+      <span id="rhea-id" className="block h-0 scroll-mt-24" aria-hidden />
       <div className="mx-auto max-w-[1600px] px-6 sm:px-10">
         <Rise>
-          <h2 className="max-w-[20ch] text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium">
-            One device. One health identity.
+          <Eyebrow>Part of Rhea</Eyebrow>
+          <h2 className="mt-5 max-w-[20ch] text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium">
+            One band, connected to your care.
           </h2>
           <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-black/60">
-            Rhea Loop collects the signals. The Rhea App makes them understandable. Your Rhea ID
-            carries them with you, always under your control.
+            Loop collects the signals. The Rhea App makes sense of them. Your Rhea ID carries them
+            with you — and your care team sees them only with your permission.
           </p>
         </Rise>
 
         <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {CHAIN.map((c, i) => (
             <Rise key={c} delay={i * 60}>
-              <div className="flex h-full items-center gap-4 rounded-2xl bg-white px-6 py-6 transition-transform duration-500 hover:scale-[1.02]">
+              <div className="flex h-full items-center gap-4 rounded-2xl bg-white px-6 py-6 ring-1 ring-black/5 transition-transform duration-500 hover:scale-[1.02]">
                 <span className="loop-num text-[13px] font-semibold text-[#2F6B4F]">
                   {String(i + 1).padStart(2, "0")}
                 </span>
@@ -480,96 +622,93 @@ function Ecosystem() {
   );
 }
 
-function CareTeam() {
+/* ---------------------------- IN THE BOX ----------------------------- */
+
+function InBox() {
   return (
-    <section className="bg-white py-20 sm:py-28">
+    <section id="box" className="py-20 sm:py-28">
       <div className="mx-auto grid max-w-[1600px] gap-12 px-6 sm:px-10 lg:grid-cols-2 lg:items-center">
         <Rise>
-          <img
-            src={imgMorning}
-            alt="Rhea Loop worn during everyday life"
-            loading="lazy"
-            className="h-[54vh] w-full rounded-[28px] object-cover"
-          />
+          <Eyebrow>In the box</Eyebrow>
+          <h2 className="mt-5 text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium">
+            Everything you need, nothing you don&apos;t
+          </h2>
+          <ul className="mt-8 space-y-4 text-[17px] text-black/70">
+            <li>Loop band</li>
+            <li>Charging accessory</li>
+            <li>Quick start guide</li>
+          </ul>
+          <p className="mt-8 text-[13px] text-black/45">
+            Final contents will be confirmed closer to launch.
+          </p>
         </Rise>
         <Rise delay={100}>
-          <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#2F6B4F]">
-            For your care team
-          </p>
-          <h2 className="mt-5 text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium">
-            Your doctor sees more than one moment.
-          </h2>
-          <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-black/60">
-            A clinical visit is a snapshot. Your health happens every day. With your permission,
-            Rhea can share meaningful long-term trends with participating providers.
-          </p>
-          <ul className="mt-8 space-y-3 text-[16px] text-black/70">
-            <li>You choose who can access your information.</li>
-            <li>You can disconnect a provider at any time.</li>
-            <li>Access is always visible to you.</li>
-          </ul>
+          <div className="grid grid-cols-2 gap-5">
+            <img
+              src={imgBox}
+              alt="Loop, band, charging accessory and quick start guide"
+              loading="lazy"
+              className="h-[52vh] w-full rounded-[28px] object-cover"
+            />
+            <img
+              src={imgCharge}
+              alt="Loop on its charging accessory"
+              loading="lazy"
+              className="mt-10 h-[52vh] w-full rounded-[28px] object-cover"
+            />
+          </div>
         </Rise>
       </div>
     </section>
   );
 }
 
-function Quote() {
-  return (
-    <section className="bg-black py-24 text-white sm:py-32">
-      <div className="mx-auto max-w-[1100px] px-6 text-center sm:px-10">
-        <Rise>
-          <h2 className="text-[clamp(1.9rem,4vw,3.2rem)] font-medium">
-            “The value isn't a single number. It's finally seeing the pattern.”
-          </h2>
-          <p className="mt-8 text-[13px] uppercase tracking-[0.2em] text-white/50">
-            Rhea Loop early access programme
-          </p>
-        </Rise>
-      </div>
-    </section>
-  );
-}
+/* ---------------------------- GET LOOP ------------------------------- */
 
-/* -------------------------- MEMBERSHIP -------------------------------- */
-
-function Membership() {
+function GetLoop() {
   return (
     <section id="membership" className="bg-white py-20 sm:py-28">
       <div className="mx-auto max-w-[1600px] px-6 sm:px-10">
         <Rise>
-          <h2 className="text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium">Choose your Rhea Loop</h2>
+          <Eyebrow>Get Loop</Eyebrow>
+          <h2 className="mt-5 text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium">
+            One band. One membership.
+          </h2>
           <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-black/60">
-            One device, one membership. Pricing will be announced ahead of launch.
+            Everything is included — the band, the app and care-team sharing. Pricing will be
+            announced ahead of launch, and the waitlist hears first.
           </p>
         </Rise>
 
         <div className="mt-12 grid gap-5 lg:grid-cols-[1.3fr_1fr]">
           <Rise>
-            <div className="overflow-hidden rounded-[28px] bg-[#F5F5F3] p-8 sm:p-10">
+            <div className="h-full overflow-hidden rounded-[28px]">
               <img
-                src={imgRender}
-                alt="Rhea Loop product render"
+                src={imgProduct}
+                alt="Close-up of the Loop sensor module"
                 loading="lazy"
-                className="mx-auto w-full max-w-xl"
+                className="h-full min-h-[340px] w-full object-cover"
               />
             </div>
           </Rise>
           <Rise delay={100}>
             <div className="flex h-full flex-col rounded-[28px] border border-black/10 p-8 sm:p-10">
-              <h3 className="text-[24px] font-medium">Rhea Loop</h3>
-              <p className="mt-2 text-[15px] text-black/55">Continuous health monitoring.</p>
+              <h3 className="text-[24px] font-medium">Loop</h3>
+              <p className="mt-2 text-[15px] text-black/55">
+                Continuous health and fitness monitoring, day and night.
+              </p>
               <ul className="mt-8 space-y-3 text-[16px] text-black/70">
-                <li>Rhea Loop device</li>
+                <li>Loop device and band</li>
                 <li>Charging accessory</li>
                 <li>Rhea App access</li>
+                <li>Care-team sharing (always opt-in)</li>
                 <li>Rhea ID integration</li>
               </ul>
               <p className="mt-8 text-[12px] font-semibold uppercase tracking-[0.2em] text-black/45">
                 Coming soon
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <ButtonLink href="#waitlist" variant="dark">
+                <ButtonLink href="#waitlist" variant="accent">
                   Join the waitlist
                 </ButtonLink>
                 <ButtonLink href="#faq" variant="outlineDark">
@@ -584,77 +723,55 @@ function Membership() {
   );
 }
 
-function InBox() {
-  return (
-    <section className="bg-[#F5F5F3] py-20 sm:py-28">
-      <div className="mx-auto grid max-w-[1600px] gap-12 px-6 sm:px-10 lg:grid-cols-2 lg:items-center">
-        <Rise>
-          <h2 className="text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium">What's in the box</h2>
-          <ul className="mt-8 space-y-4 text-[17px] text-black/70">
-            <li>Rhea Loop</li>
-            <li>Band</li>
-            <li>Charging accessory</li>
-            <li>Quick start guide</li>
-          </ul>
-          <p className="mt-8 text-[13px] text-black/45">
-            Final contents will be confirmed closer to launch.
-          </p>
-        </Rise>
-        <Rise delay={100}>
-          <img
-            src={imgBox}
-            alt="Rhea Loop, band, charging accessory and quick start guide"
-            loading="lazy"
-            className="h-[52vh] w-full rounded-[28px] object-cover"
-          />
-        </Rise>
-      </div>
-    </section>
-  );
-}
-
 /* ----------------------------- FAQ ------------------------------------ */
 
 const FAQS = [
   [
-    "What is Rhea Loop?",
-    "A minimal wearable that continuously measures everyday health and wellness signals and pairs with the Rhea App.",
+    "What is Loop?",
+    "A light, screen-free wearable from Rhea Health that continuously follows everyday health and wellness signals, and pairs with the Rhea App.",
   ],
   [
-    "What does Rhea Loop track?",
+    "What does Loop track?",
     "Heart rate, heart-rate variability, respiratory rate, blood oxygen, skin temperature, movement, activity and sleep.",
   ],
   [
-    "Does Rhea Loop diagnose medical conditions?",
-    "No. Rhea Loop is a health and wellness monitoring device, not a diagnostic device.",
+    "How is Loop different from a regular fitness tracker?",
+    "Most trackers stop at your phone. Loop can also — with your explicit permission — share long-term trends with your doctor through Rhea, so your care team can follow along between visits. Sharing is optional, and always under your control.",
+  ],
+  [
+    "Does my doctor see everything?",
+    "No. You choose which clinician can see your information and which trends they can see. You can pause or disconnect sharing at any time, and you can always see exactly who has access.",
+  ],
+  [
+    "Do I need a Rhea doctor to use Loop?",
+    "No. Loop works on its own as a fitness and wellness wearable. Connecting a care team is entirely optional.",
+  ],
+  [
+    "Does Loop diagnose medical conditions?",
+    "No. Loop is a health and wellness monitoring device, not a diagnostic device.",
   ],
   [
     "What is a Rhea ID?",
     "A persistent health identity that lets your information move with you across the Rhea ecosystem.",
   ],
-  [
-    "Can my doctor see my Rhea Loop data?",
-    "Only if you connect with a participating provider and authorize access. You can disconnect at any time.",
-  ],
   ["How long does the battery last?", "Battery specifications will be confirmed ahead of launch."],
-  ["Is Rhea Loop waterproof?", "Water-resistance ratings will be confirmed ahead of launch."],
+  ["Is Loop waterproof?", "Water-resistance ratings will be confirmed ahead of launch."],
   [
     "Does it work with iPhone and Android?",
     "The Rhea App is planned for both iOS and Android at launch.",
-  ],
-  [
-    "Can I use Rhea Loop without a Rhea provider?",
-    "Yes. Connecting with a healthcare provider is entirely optional.",
   ],
 ];
 
 function Faq() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="bg-white py-20 sm:py-28">
+    <section id="faq" className="py-20 sm:py-28">
       <div className="mx-auto max-w-[1000px] px-6 sm:px-10">
         <Rise>
-          <h2 className="text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium">Questions, answered</h2>
+          <Eyebrow>FAQ</Eyebrow>
+          <h2 className="mt-5 text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium">
+            Questions, answered
+          </h2>
         </Rise>
         <div className="mt-12 divide-y divide-black/10 border-y border-black/10">
           {FAQS.map(([q, a], i) => (
@@ -687,40 +804,59 @@ function Faq() {
 
 function ClosingCta() {
   return (
-    <section id="waitlist" className="relative h-[80vh] min-h-[520px] w-full bg-black">
-      <img
-        src={imgProduct}
-        alt="Close-up of the Rhea Loop sensor module"
-        loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover opacity-70"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/40" />
-      <div className="relative z-10 mx-auto flex h-full max-w-[1100px] flex-col items-center justify-center px-6 text-center sm:px-10">
-        <h2 className="max-w-[20ch] text-[clamp(2.2rem,5.5vw,4.4rem)] font-medium text-white">
-          Know your health. Wherever life takes you.
-        </h2>
-        <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-white/80">
-          Rhea Loop gives you a clearer view of your health today, and the foundation for a more
-          connected healthcare experience tomorrow.
-        </p>
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <ButtonLink href="#waitlist" variant="light" size="lg">
-            Join the waitlist
-          </ButtonLink>
-          <ButtonLink href="#app" variant="outlineLight" size="lg">
-            Explore Rhea App
-          </ButtonLink>
+    <section id="waitlist" className="px-6 pb-24 sm:px-10">
+      <div className="relative mx-auto max-w-[1600px] overflow-hidden rounded-[32px]">
+        <img
+          src={imgHero}
+          alt="Loop worn on a wrist"
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#173F2C]/90 via-[#173F2C]/60 to-[#173F2C]/20" />
+        <div className="relative z-10 flex min-h-[480px] flex-col justify-center px-8 py-20 sm:px-14">
+          <h2 className="max-w-[16ch] text-[clamp(2.2rem,5.5vw,4.2rem)] font-medium text-white">
+            Stay in the loop.
+          </h2>
+          <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-white/80">
+            Join the waitlist for first access to Loop — for your own health, and for the people who
+            look after it.
+          </p>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <ButtonLink href="#waitlist" variant="light" size="lg">
+              Join the waitlist
+            </ButtonLink>
+            <ButtonLink href="#sharing" variant="outlineLight" size="lg">
+              How sharing works
+            </ButtonLink>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
+/* ----------------------------- FOOTER --------------------------------- */
+
 function LoopFooter() {
-  const topLinks = (labels: string[]) => labels.map((label) => ({ label, href: "#top" }));
   const cols: { title: string; links: { label: string; href: string }[] }[] = [
-    { title: "Rhea Loop", links: topLinks(["Rhea Loop", "Health metrics", "Rhea App", "Rhea ID"]) },
-    { title: "Learn", links: topLinks(["How it works", "For your care team", "Privacy", "FAQ"]) },
+    {
+      title: "Loop",
+      links: [
+        { label: "Loop", href: "#top" },
+        { label: "Health metrics", href: "#metrics" },
+        { label: "Rhea App", href: "#ecosystem" },
+        { label: "Rhea ID", href: "#rhea-id" },
+      ],
+    },
+    {
+      title: "Learn",
+      links: [
+        { label: "How it works", href: "#how" },
+        { label: "Sharing & privacy", href: "#sharing" },
+        { label: "For your care team", href: "#sharing" },
+        { label: "FAQ", href: "#faq" },
+      ],
+    },
     {
       title: "Rhea Health",
       links: [
@@ -733,19 +869,19 @@ function LoopFooter() {
     },
   ];
   return (
-    <footer className="bg-black py-16 text-white">
+    <footer className="bg-[#F5F5F3] py-16 text-black">
       <div className="mx-auto max-w-[1600px] px-6 sm:px-10">
         <div className="grid gap-10 md:grid-cols-4">
-          <img src={logo} alt="Rhea Loop" className="h-6 w-auto self-start invert opacity-80" />
+          <img src={logo} alt="Loop" className="h-6 w-auto self-start opacity-80" />
           {cols.map((c) => (
             <div key={c.title}>
-              <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-white/45">
+              <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-black/45">
                 {c.title}
               </p>
-              <ul className="mt-4 space-y-3 text-[15px] text-white/75">
+              <ul className="mt-4 space-y-3 text-[15px] text-black/70">
                 {c.links.map((l) => (
                   <li key={l.label}>
-                    <a href={l.href} className="transition-colors hover:text-white">
+                    <a href={l.href} className="transition-colors hover:text-black">
                       {l.label}
                     </a>
                   </li>
@@ -754,9 +890,9 @@ function LoopFooter() {
             </div>
           ))}
         </div>
-        <p className="mt-14 text-[13px] text-white/40">
-          Rhea Loop is a health and wellness monitoring device. It is not intended to diagnose,
-          treat or prevent any disease.
+        <p className="mt-14 text-[13px] text-black/40">
+          Loop is a health and wellness monitoring device. It is not intended to diagnose, treat or
+          prevent any disease.
         </p>
       </div>
     </footer>
