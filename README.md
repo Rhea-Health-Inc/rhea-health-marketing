@@ -34,11 +34,13 @@ npx tsc --noEmit
 
 Stack: TanStack Start (React 19, file-based routing), Vite, Tailwind CSS 4.
 
-## Known issue carried over from the original project
+## Assets
 
-The home hero video
-(`src/assets/hero-clinic.mp4.asset.json`) is a Lovable-hosted asset pointer —
-its URL (`/__l5e/assets-v1/…`) only resolves inside Lovable's hosting.
-Drop the real `hero-clinic.mp4` file into `src/assets/`
-and update the import in `src/routes/index.tsx` before deploying anywhere else.
+The home hero video (`src/assets/hero-clinic.mp4`, with poster
+`src/assets/hero-poster.jpg`) is a real file in the repo — the original
+Lovable-hosted asset pointer was replaced on 2026-11-12 with a stock
+consultation clip ("A Doctor Talking to his Patient" by olia danilevich,
+Pexels video 4352136, Pexels License — free to use, no attribution required;
+credited here as a courtesy). The file is muted by design and ships without
+an audio track.
 (The Rhea logo was resolved on 2026-11-11: `src/assets/rhea-logo.png` is the real file.)

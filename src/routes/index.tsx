@@ -3,7 +3,8 @@ import { Nav, Logo } from "@/components/clinik/Nav";
 import { Footer } from "@/components/clinik/Footer";
 import { Reveal } from "@/components/clinik/Reveal";
 import { Portrait, TeamRow, PORTRAITS } from "@/components/clinik/Portraits";
-import heroVideo from "@/assets/hero-clinic.mp4.asset.json";
+import heroVideo from "@/assets/hero-clinic.mp4";
+import heroPoster from "@/assets/hero-poster.jpg";
 import imgConsult from "@/assets/mkt-consult.jpg";
 import imgTeam from "@/assets/mkt-team.jpg";
 import imgHospital from "@/assets/mkt-hospital.jpg";
@@ -87,8 +88,8 @@ function Hero() {
     <section className="relative isolate min-h-[86vh] sm:min-h-[92vh] flex items-center overflow-hidden">
       <video
         className="absolute inset-0 w-full h-full object-cover"
-        src={heroVideo.url}
-        poster={imgConsult}
+        src={heroVideo}
+        poster={heroPoster}
         autoPlay
         muted
         loop
@@ -460,7 +461,7 @@ function ScribeFlow() {
             ["Plan", "Naproxen 500mg BID · PT ×6"],
             ["Codes", "M17.0 · 97110"],
           ].map(([k, v]) => (
-            <div key={k} className="rounded-lg border border-border/70 p-2">
+            <div key={k} className="rounded-xl border border-border/70 p-2">
               <div className="text-[12px] uppercase tracking-wider text-muted-foreground">{k}</div>
               <div className="text-foreground mt-0.5">{v}</div>
             </div>
@@ -810,7 +811,7 @@ function HospitalPill({
       className={`${className} rounded-2xl bg-background hairline px-4 py-3 min-w-[180px] shadow-[var(--shadow-clinik-sm)]`}
     >
       <div className="flex items-center gap-2">
-        <span className="w-6 h-6 rounded-md bg-foreground/90 text-background text-[13px] font-bold flex items-center justify-center">
+        <span className="w-6 h-6 rounded-full bg-foreground/90 text-background text-[13px] font-bold flex items-center justify-center">
           H
         </span>
         <div>
