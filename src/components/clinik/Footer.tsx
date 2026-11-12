@@ -1,4 +1,5 @@
 import { Logo } from "@/components/clinik/Nav";
+import { siteLink } from "@/lib/app-url";
 
 export function Footer() {
   const cols: { h: string; l: { t: string; href: string }[] }[] = [
@@ -74,7 +75,7 @@ export function Footer() {
                 {c.l.map((x) => (
                   <li key={x.t}>
                     <a
-                      href={x.href}
+                      href={x.href.startsWith("/") ? siteLink(x.href) : x.href}
                       className="text-muted-foreground hover:text-foreground transition-colors"
                     >
                       {x.t}

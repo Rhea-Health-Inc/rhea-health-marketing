@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
+import { siteLink } from "@/lib/app-url";
 import logo from "@/assets/loop-logo.png";
 import imgRender from "@/assets/loop-render.jpg";
 import imgMorning from "@/assets/loop-morning.jpg";
@@ -716,10 +717,20 @@ function ClosingCta() {
 }
 
 function LoopFooter() {
-  const cols = [
-    { title: "Rhea Loop", links: ["Rhea Loop", "Health metrics", "Rhea App", "Rhea ID"] },
-    { title: "Learn", links: ["How it works", "For your care team", "Privacy", "FAQ"] },
-    { title: "Rhea Health", links: ["Platform", "Solutions", "Pricing", "Company"] },
+  const topLinks = (labels: string[]) => labels.map((label) => ({ label, href: "#top" }));
+  const cols: { title: string; links: { label: string; href: string }[] }[] = [
+    { title: "Rhea Loop", links: topLinks(["Rhea Loop", "Health metrics", "Rhea App", "Rhea ID"]) },
+    { title: "Learn", links: topLinks(["How it works", "For your care team", "Privacy", "FAQ"]) },
+    {
+      title: "Rhea Health",
+      links: [
+        { label: "Home", href: siteLink("/") },
+        { label: "Platform", href: siteLink("/#product") },
+        { label: "Solutions", href: siteLink("/#scribe") },
+        { label: "Pricing", href: siteLink("/pricing") },
+        { label: "Company", href: siteLink("/about") },
+      ],
+    },
   ];
   return (
     <footer className="bg-black py-16 text-white">
@@ -733,9 +744,9 @@ function LoopFooter() {
               </p>
               <ul className="mt-4 space-y-3 text-[15px] text-white/75">
                 {c.links.map((l) => (
-                  <li key={l}>
-                    <a href="#top" className="transition-colors hover:text-white">
-                      {l}
+                  <li key={l.label}>
+                    <a href={l.href} className="transition-colors hover:text-white">
+                      {l.label}
                     </a>
                   </li>
                 ))}

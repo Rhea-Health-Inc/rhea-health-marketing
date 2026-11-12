@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import logoUrl from "@/assets/rhea-logo.png";
-import { appLink } from "@/lib/app-url";
+import { appLink, siteLink } from "@/lib/app-url";
 
 export function Nav() {
   return (
@@ -10,10 +10,10 @@ export function Nav() {
           <Logo />
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-          <a href="/#product" className="hover:text-foreground transition-colors">
+          <a href={siteLink("/#product")} className="hover:text-foreground transition-colors">
             Platform
           </a>
-          <a href="/#scribe" className="hover:text-foreground transition-colors">
+          <a href={siteLink("/#scribe")} className="hover:text-foreground transition-colors">
             Solutions
           </a>
           <Link
@@ -23,7 +23,7 @@ export function Nav() {
           >
             Pricing
           </Link>
-          <a href="/#security" className="hover:text-foreground transition-colors">
+          <a href={siteLink("/#security")} className="hover:text-foreground transition-colors">
             Technology
           </a>
           <Link

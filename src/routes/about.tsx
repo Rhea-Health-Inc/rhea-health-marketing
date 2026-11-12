@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { appLink } from "@/lib/app-url";
+import { appLink, siteLink } from "@/lib/app-url";
 import { Nav } from "@/components/clinik/Nav";
 import { Reveal } from "@/components/clinik/Reveal";
 import { Footer } from "@/components/clinik/Footer";
@@ -253,7 +253,7 @@ function About() {
                 Request demo
               </a>
               <a
-                href="/pricing"
+                href={siteLink("/pricing")}
                 className="inline-flex items-center h-12 px-7 rounded-full border border-border text-foreground text-[15px] font-medium hover:bg-muted transition-colors"
               >
                 View pricing →
