@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 import { siteLink } from "@/lib/app-url";
-import logo from "@/assets/loop-logo.png";
 import imgRender from "@/assets/loop-render.jpg";
 import imgMorning from "@/assets/loop-morning.jpg";
 import imgWork from "@/assets/loop-work.jpg";
@@ -112,7 +111,7 @@ function ButtonLink({
   const variants: Record<string, string> = {
     light: "bg-white text-black",
     dark: "bg-black text-white",
-    accent: "bg-[#2F6B4F] text-white",
+    accent: "bg-black text-white",
     outlineLight: "border border-white/45 text-white hover:bg-white hover:text-black",
     outlineDark: "border border-black/25 text-black hover:bg-black hover:text-white",
   };
@@ -128,7 +127,7 @@ function Eyebrow({ children, tone = "green" }: { children: ReactNode; tone?: "gr
   return (
     <p
       className={`text-[12px] font-semibold uppercase tracking-[0.2em] ${
-        tone === "green" ? "text-[#2F6B4F]" : "text-white/60"
+        tone === "green" ? "text-black/45" : "text-white/60"
       }`}
     >
       {children}
@@ -173,7 +172,7 @@ function LoopPage() {
 
 function Announcement() {
   return (
-    <div className="flex w-full items-center justify-center gap-3 bg-[#2F6B4F] px-6 py-2.5 text-center text-[13px] text-white">
+    <div className="flex w-full items-center justify-center gap-3 bg-black px-6 py-2.5 text-center text-[13px] text-white">
       <span>Loop is coming soon. Join the waitlist for first access.</span>
       <a href="#waitlist" className="whitespace-nowrap underline underline-offset-4">
         Join the waitlist
@@ -195,7 +194,9 @@ function TopNav() {
     <header className="sticky top-0 z-50 w-full border-b border-black/8 bg-[#FAF9F6]/85 backdrop-blur-md">
       <div className="mx-auto flex h-[68px] max-w-[1600px] items-center justify-between gap-6 px-6 sm:px-10">
         <a href="#top" className="shrink-0">
-          <img src={logo} alt="Loop" className="h-8 w-auto sm:h-9" />
+          <span className="text-[26px] font-semibold leading-none tracking-[-0.02em] text-black">
+            Loop
+          </span>
         </a>
         <nav className="hidden items-center gap-8 lg:flex">
           {NAV.map((n) => (
@@ -224,7 +225,7 @@ function Hero() {
       <div className="mx-auto grid max-w-[1600px] items-center gap-12 px-6 pb-20 pt-14 sm:px-10 lg:grid-cols-2 lg:pb-28 lg:pt-20">
         <Rise>
           <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 text-[13px] text-black/70">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#2F6B4F]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-black" />
             Loop · a wearable by Rhea Health
           </div>
           <h1 className="mt-7 max-w-[12ch] text-[clamp(2.9rem,6vw,5.6rem)] font-medium">
@@ -248,28 +249,13 @@ function Hero() {
         </Rise>
 
         <Rise delay={120}>
-          <div className="relative">
-            <div className="overflow-hidden rounded-[32px] bg-[#EFEDE8]">
-              <img
-                src={imgRender}
-                alt="The Loop band"
-                className="h-full max-h-[560px] w-full object-cover"
-              />
-            </div>
-            <div className="absolute left-5 top-5 rounded-2xl bg-white/90 px-5 py-4 shadow-[0_12px_32px_rgba(16,24,20,0.10)] backdrop-blur">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-black/45">
-                Last night
-              </p>
-              <p className="loop-num mt-1 text-[22px] font-medium">Sleep 7 h 42 min</p>
-            </div>
-            <div className="absolute bottom-5 right-5 flex items-center gap-2.5 rounded-full bg-[#173F2C] py-2.5 pl-3.5 pr-5 text-white shadow-[0_12px_32px_rgba(16,24,20,0.22)]">
-              <span className="h-2 w-2 rounded-full bg-[#7FD8A4]" />
-              <span className="text-[13px] font-medium">Shared with your care team · On</span>
-            </div>
+          <div className="overflow-hidden rounded-[32px] bg-[#EFEDE8]">
+            <img
+              src={imgRender}
+              alt="The Loop band"
+              className="h-full max-h-[560px] w-full object-cover"
+            />
           </div>
-          <p className="mt-3 text-right text-[12px] text-black/35">
-            Illustrative app data. Sharing is always opt-in.
-          </p>
         </Rise>
       </div>
     </section>
@@ -345,7 +331,7 @@ function TwoPaths() {
                   <p className="mt-3 flex-1 text-[16px] leading-relaxed text-black/60">{c.body}</p>
                   <a
                     href={c.href}
-                    className="mt-6 inline-flex items-center gap-2 text-[15px] font-medium text-[#2F6B4F]"
+                    className="mt-6 inline-flex items-center gap-2 text-[15px] font-medium text-black underline decoration-black/30 underline-offset-4"
                   >
                     {c.link} <span aria-hidden>→</span>
                   </a>
@@ -462,29 +448,29 @@ function Sharing() {
     { label: "Location", state: "Never shared", on: false },
   ];
   return (
-    <section id="sharing" className="bg-[#173F2C] py-20 text-white sm:py-28">
+    <section id="sharing" className="bg-[#F5F5F3] py-20 sm:py-28">
       <span id="care-team" className="block h-0 scroll-mt-24" aria-hidden />
       <span id="privacy" className="block h-0 scroll-mt-24" aria-hidden />
       <div className="mx-auto grid max-w-[1600px] items-center gap-14 px-6 sm:px-10 lg:grid-cols-2">
         <Rise>
-          <Eyebrow tone="white">Sharing, on your terms</Eyebrow>
+          <Eyebrow>Sharing, on your terms</Eyebrow>
           <h2 className="mt-5 max-w-[18ch] text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium">
             Keep your doctor in the loop — only if you want them there.
           </h2>
           <div className="mt-12 space-y-10">
             {steps.map((s) => (
               <div key={s.n} className="flex gap-6">
-                <span className="loop-num text-[14px] font-semibold text-[#7FD8A4]">{s.n}</span>
+                <span className="loop-num text-[14px] font-semibold text-black/40">{s.n}</span>
                 <div>
                   <h3 className="text-[20px] font-medium">{s.title}</h3>
-                  <p className="mt-2 max-w-md text-[16px] leading-relaxed text-white/65">
+                  <p className="mt-2 max-w-md text-[16px] leading-relaxed text-black/60">
                     {s.body}
                   </p>
                 </div>
               </div>
             ))}
           </div>
-          <ul className="mt-12 space-y-3 text-[16px] text-white/80">
+          <ul className="mt-12 space-y-3 text-[16px] text-black/70">
             <li>Sharing is always opt-in — never on by default.</li>
             <li>Pause or disconnect a clinician at any time.</li>
             <li>You can always see exactly who has access.</li>
@@ -492,7 +478,7 @@ function Sharing() {
         </Rise>
 
         <Rise delay={120}>
-          <div className="rounded-[28px] bg-white p-8 text-black shadow-[0_24px_60px_rgba(0,0,0,0.25)] sm:p-10">
+          <div className="rounded-[28px] bg-white p-8 text-black ring-1 ring-black/10 sm:p-10">
             <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-black/45">
               Sharing with
             </p>
@@ -504,11 +490,11 @@ function Sharing() {
                   <span className="text-[16px]">{r.label}</span>
                   <span
                     className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[13px] font-medium ${
-                      r.on ? "bg-[#2F6B4F]/10 text-[#2F6B4F]" : "bg-black/5 text-black/45"
+                      r.on ? "bg-black text-white" : "bg-black/5 text-black/45"
                     }`}
                   >
                     <span
-                      className={`h-1.5 w-1.5 rounded-full ${r.on ? "bg-[#2F6B4F]" : "bg-black/30"}`}
+                      className={`h-1.5 w-1.5 rounded-full ${r.on ? "bg-white" : "bg-black/30"}`}
                     />
                     {r.state}
                   </span>
@@ -560,14 +546,14 @@ function Baseline() {
               <path
                 d="M0 140 C 80 130, 140 150, 220 138 S 360 128, 440 132 S 540 126, 600 130"
                 fill="none"
-                stroke="rgba(23,63,44,0.14)"
+                stroke="rgba(0,0,0,0.10)"
                 strokeWidth="10"
                 strokeLinecap="round"
               />
               <path
                 d="M0 145 C 90 138, 150 150, 230 142 S 370 150, 450 120 S 540 78, 600 66"
                 fill="none"
-                stroke="#2F6B4F"
+                stroke="#000000"
                 strokeWidth="3"
                 strokeLinecap="round"
                 strokeDasharray="1200"
@@ -587,7 +573,7 @@ function Baseline() {
 
 /* -------------------------- ECOSYSTEM -------------------------------- */
 
-const CHAIN = ["Loop", "Rhea App", "Rhea ID", "Health record", "Rhea AI", "Care team"];
+const CHAIN = ["Loop", "Rhea App", "Rhea ID", "Health record", "Insights", "Care team"];
 
 function Ecosystem() {
   return (
@@ -609,7 +595,7 @@ function Ecosystem() {
           {CHAIN.map((c, i) => (
             <Rise key={c} delay={i * 60}>
               <div className="flex h-full items-center gap-4 rounded-2xl bg-white px-6 py-6 ring-1 ring-black/5 transition-transform duration-500 hover:scale-[1.02]">
-                <span className="loop-num text-[13px] font-semibold text-[#2F6B4F]">
+                <span className="loop-num text-[13px] font-semibold text-black/40">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="whitespace-nowrap text-[18px] font-medium">{c}</span>
@@ -812,7 +798,7 @@ function ClosingCta() {
           loading="lazy"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#173F2C]/90 via-[#173F2C]/60 to-[#173F2C]/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/15" />
         <div className="relative z-10 flex min-h-[480px] flex-col justify-center px-8 py-20 sm:px-14">
           <h2 className="max-w-[16ch] text-[clamp(2.2rem,5.5vw,4.2rem)] font-medium text-white">
             Stay in the loop.
@@ -872,7 +858,9 @@ function LoopFooter() {
     <footer className="bg-[#F5F5F3] py-16 text-black">
       <div className="mx-auto max-w-[1600px] px-6 sm:px-10">
         <div className="grid gap-10 md:grid-cols-4">
-          <img src={logo} alt="Loop" className="h-6 w-auto self-start opacity-80" />
+          <span className="self-start text-[26px] font-semibold leading-none tracking-[-0.02em] text-black">
+            Loop
+          </span>
           {cols.map((c) => (
             <div key={c.title}>
               <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-black/45">
