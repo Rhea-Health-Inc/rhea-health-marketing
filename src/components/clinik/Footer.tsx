@@ -12,6 +12,7 @@ export function Footer() {
         { t: "Dashboard", href: "#" },
         { t: "Integrations", href: "#" },
         { t: "Loop", href: "/loop" },
+        { t: "Sample page", href: "/sample" },
       ],
     },
     {
