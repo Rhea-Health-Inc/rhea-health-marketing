@@ -85,7 +85,7 @@ function Rise({
 }
 
 const INK = "#1A2A22";
-const DEEP = "#124B32";
+const DEEP = "#2F6B4F";
 const GREEN = "#2F6B4F";
 const GOLD = "#B29049";
 const PAPER = "#F6F4EE";
@@ -105,7 +105,7 @@ function AiChip({ dark = false }: { dark?: boolean }) {
   return (
     <span
       className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold ${
-        dark ? "bg-white/10 text-white" : "bg-[#E9EFE7] text-[#124B32]"
+        dark ? "bg-white/10 text-white" : "bg-[#E9EFE7] text-[#2F6B4F]"
       }`}
     >
       <Sparkles size={12} />
@@ -124,7 +124,7 @@ function SamplePage() {
       <style>{`
         .sample-root { font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif; }
         .sample-root .serif { font-family: "Source Serif 4", Georgia, "Times New Roman", serif; font-weight: 500; letter-spacing: -0.015em; }
-        .sample-root ::selection { background: #124B32; color: #F6F4EE; }
+        .sample-root ::selection { background: #2F6B4F; color: #F6F4EE; }
       `}</style>
       <SampleBar />
       <ConceptHome />
@@ -144,12 +144,20 @@ function SampleBar() {
             Concept redesigns, shown for review. Not part of the live site.
           </span>
         </p>
-        <a
-          href={siteLink("/")}
-          className="text-[13px] font-medium text-white/80 underline decoration-white/30 underline-offset-4 hover:text-white"
-        >
-          Back to the live homepage
-        </a>
+        <div className="flex items-center gap-5">
+          <a
+            href={siteLink("/sample-2")}
+            className="text-[13px] font-medium text-white/80 underline decoration-white/30 underline-offset-4 hover:text-white"
+          >
+            Sample 2
+          </a>
+          <a
+            href={siteLink("/")}
+            className="text-[13px] font-medium text-white/80 underline decoration-white/30 underline-offset-4 hover:text-white"
+          >
+            Back to the live homepage
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -566,7 +574,7 @@ function InboxMock() {
       name: "J. Thompson",
       text: "Refill request for the prescription from his last visit",
       tag: "Draft ready",
-      tagCls: "bg-[#E9EFE7] text-[#124B32]",
+      tagCls: "bg-[#E9EFE7] text-[#2F6B4F]",
       ai: true,
     },
     {
@@ -1060,7 +1068,7 @@ function FinalCta() {
             </a>
             <a
               href={siteLink("/pricing")}
-              className="inline-flex h-[52px] items-center rounded-full border border-white/40 px-8 text-[15px] font-semibold text-white transition-colors hover:bg-white hover:text-[#124B32]"
+              className="inline-flex h-[52px] items-center rounded-full border border-white/40 px-8 text-[15px] font-semibold text-white transition-colors hover:bg-white hover:text-[#2F6B4F]"
             >
               See pricing
             </a>
