@@ -14,7 +14,6 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as LoopRouteImport } from './routes/loop'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as SampleRouteImport } from './routes/sample'
-import { Route as Sample2RouteImport } from './routes/sample-2'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -41,11 +40,6 @@ const SampleRoute = SampleRouteImport.update({
   path: '/sample',
   getParentRoute: () => rootRouteImport,
 } as any)
-const Sample2Route = Sample2RouteImport.update({
-  id: '/sample-2',
-  path: '/sample-2',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -53,7 +47,6 @@ export interface FileRoutesByFullPath {
   '/loop': typeof LoopRoute
   '/pricing': typeof PricingRoute
   '/sample': typeof SampleRoute
-  '/sample-2': typeof Sample2Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -61,7 +54,6 @@ export interface FileRoutesByTo {
   '/loop': typeof LoopRoute
   '/pricing': typeof PricingRoute
   '/sample': typeof SampleRoute
-  '/sample-2': typeof Sample2Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -70,15 +62,13 @@ export interface FileRoutesById {
   '/loop': typeof LoopRoute
   '/pricing': typeof PricingRoute
   '/sample': typeof SampleRoute
-  '/sample-2': typeof Sample2Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/loop' | '/pricing' | '/sample' | '/sample-2'
+  fullPaths: '/' | '/about' | '/loop' | '/pricing' | '/sample'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/loop' | '/pricing' | '/sample' | '/sample-2'
-  id:
-    '__root__' | '/' | '/about' | '/loop' | '/pricing' | '/sample' | '/sample-2'
+  to: '/' | '/about' | '/loop' | '/pricing' | '/sample'
+  id: '__root__' | '/' | '/about' | '/loop' | '/pricing' | '/sample'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -87,7 +77,6 @@ export interface RootRouteChildren {
   LoopRoute: typeof LoopRoute
   PricingRoute: typeof PricingRoute
   SampleRoute: typeof SampleRoute
-  Sample2Route: typeof Sample2Route
 }
 
 declare module '@tanstack/react-router' {
@@ -127,13 +116,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SampleRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sample-2': {
-      id: '/sample-2'
-      path: '/sample-2'
-      fullPath: '/sample-2'
-      preLoaderRoute: typeof Sample2RouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -143,7 +125,6 @@ const rootRouteChildren: RootRouteChildren = {
   LoopRoute: LoopRoute,
   PricingRoute: PricingRoute,
   SampleRoute: SampleRoute,
-  Sample2Route: Sample2Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

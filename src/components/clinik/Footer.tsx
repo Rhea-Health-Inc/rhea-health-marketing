@@ -13,7 +13,6 @@ export function Footer() {
         { t: "Integrations", href: "#" },
         { t: "Loop", href: "/loop" },
         { t: "Sample page", href: "/sample" },
-        { t: "Sample 2", href: "/sample-2" },
       ],
     },
     {
