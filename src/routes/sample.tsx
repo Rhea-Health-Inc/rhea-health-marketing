@@ -17,7 +17,6 @@ import logo from "@/assets/rhea-logo.png";
 import heroVideo from "@/assets/hero-clinic.mp4";
 import heroPoster from "@/assets/hero-poster.jpg";
 import imgConsult from "@/assets/mkt-consult.jpg";
-import imgTeam from "@/assets/mkt-team.jpg";
 import imgHospital from "@/assets/mkt-hospital.jpg";
 import imgActivity from "@/assets/loop-activity.jpg";
 
@@ -277,7 +276,7 @@ function NoteMock({ className = "" }: { className?: string }) {
       <div className="mt-5 flex items-center justify-between border-t border-black/8 pt-4">
         <span className="text-[12px] text-black/45">Nothing files until you sign</span>
         <span
-          className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[12.5px] font-semibold text-white"
+          className="inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-[12.5px] font-semibold text-white"
           style={{ backgroundColor: GREEN }}
         >
           <PenLine size={13} /> Review and sign
@@ -289,9 +288,12 @@ function NoteMock({ className = "" }: { className?: string }) {
 
 function ConceptHero() {
   return (
-    <section id="top" className="mx-auto max-w-[1440px] px-6 pb-24 pt-12 sm:px-10 lg:pt-16">
+    <section
+      id="top"
+      className="mx-auto grid max-w-[1440px] items-center gap-14 px-6 pb-28 pt-12 sm:px-10 lg:grid-cols-[1.02fr_1fr] lg:pt-16"
+    >
       <Rise>
-        <div className="flex flex-col items-center text-center">
+        <div>
           <p
             className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[13px] font-medium ring-1 ring-black/8"
             style={{ color: INK }}
@@ -300,17 +302,17 @@ function ConceptHero() {
             The AI-native clinical platform
           </p>
           <h1
-            className="serif mt-8 max-w-[20ch] text-[clamp(2.7rem,5.4vw,4.6rem)] leading-[1.04]"
+            className="serif mt-8 max-w-[15ch] text-[clamp(2.6rem,4.8vw,4.2rem)] leading-[1.05]"
             style={{ color: INK }}
           >
             More time with patients. <em style={{ color: DEEP }}>Less time documenting.</em>
           </h1>
-          <p className="mt-7 max-w-2xl text-[17.5px] leading-relaxed text-black/60">
+          <p className="mt-7 max-w-xl text-[17.5px] leading-relaxed text-black/60">
             Rhea listens to the visit, drafts the note, triages the inbox and keeps care moving
             between appointments, so your clinicians finish on time and your patients get their
             doctor back.
           </p>
-          <div className="mt-9 flex flex-wrap justify-center gap-3">
+          <div className="mt-9 flex flex-wrap gap-3">
             <a
               href="#demo"
               className="inline-flex h-[52px] items-center rounded-full px-8 text-[15px] font-semibold text-white transition-transform duration-300 hover:scale-[1.03]"
@@ -326,17 +328,17 @@ function ConceptHero() {
               See how it works
             </a>
           </div>
-          <p className="mt-6 text-[13px] uppercase tracking-[0.16em] text-black/40">
+          <p className="mt-8 text-[13px] uppercase tracking-[0.16em] text-black/40">
             For solo practices, groups and health systems
           </p>
         </div>
       </Rise>
 
       <Rise delay={140}>
-        <div className="relative mt-14">
+        <div className="relative">
           <div className="overflow-hidden rounded-[28px] ring-1 ring-black/10">
             <video
-              className="h-[52vh] max-h-[580px] min-h-[340px] w-full object-cover"
+              className="h-[420px] w-full object-cover lg:h-[560px]"
               autoPlay
               muted
               loop
@@ -346,10 +348,10 @@ function ConceptHero() {
               <source src={heroVideo} type="video/mp4" />
             </video>
           </div>
-          <NoteMock className="absolute -bottom-10 right-8 hidden w-[380px] lg:block" />
-          <div className="absolute bottom-6 left-8 hidden items-center gap-2 rounded-full bg-black/55 px-4 py-2 text-[12.5px] font-medium text-white backdrop-blur md:inline-flex">
+          <div className="absolute bottom-5 right-5 hidden items-center gap-2 rounded-full bg-black/55 px-4 py-2 text-[12.5px] font-medium text-white backdrop-blur md:inline-flex">
             <Mic size={13} /> Listening with patient consent
           </div>
+          <NoteMock className="absolute -bottom-8 -left-8 hidden w-[360px] lg:block" />
         </div>
         <NoteMock className="mt-6 lg:hidden" />
       </Rise>
@@ -783,61 +785,55 @@ function WholePractice() {
   ];
   return (
     <section className="mx-auto max-w-[1440px] px-6 py-24 sm:px-10">
-      <Rise>
-        <div className="overflow-hidden rounded-[28px]">
-          <img
-            src={imgHospital}
-            alt="Clinicians walking through a hospital atrium"
-            loading="lazy"
-            className="h-[38vh] max-h-[420px] min-h-[260px] w-full object-cover"
-          />
-        </div>
-      </Rise>
-      <Rise delay={80}>
-        <div className="mt-16 flex flex-col items-center text-center">
-          <Eyebrow>One platform</Eyebrow>
-          <h2
-            className="serif mt-5 max-w-[24ch] text-[clamp(1.9rem,3.4vw,2.9rem)] leading-[1.1]"
-            style={{ color: INK }}
-          >
-            Built for the whole practice, <em style={{ color: DEEP }}>not just the visit.</em>
-          </h2>
-        </div>
-      </Rise>
-      <div className="mt-12 grid gap-5 md:grid-cols-3">
-        {cards.map((c, i) => (
-          <Rise key={c.title} delay={i * 90}>
-            <div className="h-full rounded-[24px] bg-white p-8 ring-1 ring-black/8">
-              <h3 className="text-[19px] font-semibold" style={{ color: INK }}>
-                {c.title}
-              </h3>
-              <ul className="mt-5 space-y-3">
-                {c.items.map((t) => (
-                  <li key={t} className="flex items-start gap-3 text-[15px] text-black/65">
-                    <Check
-                      size={15}
-                      strokeWidth={3}
-                      className="mt-[3px] shrink-0"
-                      style={{ color: GREEN }}
-                    />
-                    {t}
-                  </li>
-                ))}
-              </ul>
+      <div className="grid items-start gap-14 lg:grid-cols-2">
+        <Rise>
+          <div>
+            <Eyebrow>One platform</Eyebrow>
+            <h2
+              className="serif mt-5 max-w-[20ch] text-[clamp(1.9rem,3.4vw,2.9rem)] leading-[1.1]"
+              style={{ color: INK }}
+            >
+              Built for the whole practice, <em style={{ color: DEEP }}>not just the visit.</em>
+            </h2>
+            <p className="mt-6 max-w-lg text-[16.5px] leading-relaxed text-black/60">
+              The visit, the inbox and everything after it, on one record: from a solo practice to a
+              hospital network, everyone works from the same picture of the patient.
+            </p>
+            <div className="mt-10 overflow-hidden rounded-[24px]">
+              <img
+                src={imgHospital}
+                alt="Clinicians walking through a hospital atrium"
+                loading="lazy"
+                className="h-[300px] w-full object-cover"
+              />
             </div>
-          </Rise>
-        ))}
-      </div>
-      <Rise delay={100}>
-        <div className="mt-6 overflow-hidden rounded-[24px]">
-          <img
-            src={imgTeam}
-            alt="A nurse and a doctor reviewing together"
-            loading="lazy"
-            className="h-[30vh] max-h-[320px] min-h-[220px] w-full object-cover"
-          />
+          </div>
+        </Rise>
+        <div className="space-y-5">
+          {cards.map((c, i) => (
+            <Rise key={c.title} delay={i * 90}>
+              <div className="rounded-[24px] bg-white p-8 ring-1 ring-black/8">
+                <h3 className="text-[19px] font-semibold" style={{ color: INK }}>
+                  {c.title}
+                </h3>
+                <ul className="mt-5 space-y-3">
+                  {c.items.map((t) => (
+                    <li key={t} className="flex items-start gap-3 text-[15px] text-black/65">
+                      <Check
+                        size={15}
+                        strokeWidth={3}
+                        className="mt-[3px] shrink-0"
+                        style={{ color: GREEN }}
+                      />
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Rise>
+          ))}
         </div>
-      </Rise>
+      </div>
     </section>
   );
 }
