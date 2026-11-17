@@ -955,6 +955,38 @@ function PricingTeaser() {
             </Rise>
           ))}
         </div>
+        <Rise delay={100}>
+          <div className="mx-auto mt-6 grid max-w-5xl gap-6 rounded-[24px] bg-[#F6F4EE] p-8 ring-1 ring-black/8 md:grid-cols-[1fr_1.4fr] md:items-center">
+            <div>
+              <h3 className="text-[16px] font-semibold" style={{ color: INK }}>
+                Device management
+              </h3>
+              <p className="serif mt-2 text-[30px] leading-none" style={{ color: INK }}>
+                $1,000
+                <span className="ml-2 align-middle font-sans text-[13px] text-black/50">
+                  a year, on every plan
+                </span>
+              </p>
+            </div>
+            <ul className="space-y-3">
+              {[
+                "Three listening devices included in your first year, shipping included",
+                "Faulty devices returned and replaced, up to two replacements a year",
+                "Enterprise fleets: a higher fee per site, with a higher replacement allowance",
+              ].map((t) => (
+                <li key={t} className="flex items-start gap-3 text-[14.5px] text-black/70">
+                  <Check
+                    size={15}
+                    strokeWidth={3}
+                    className="mt-[3px] shrink-0"
+                    style={{ color: GREEN }}
+                  />
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Rise>
         <Rise delay={120}>
           <p className="mt-10 text-center">
             <a
